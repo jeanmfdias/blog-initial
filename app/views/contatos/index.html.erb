@@ -1,0 +1,84 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% content_for :seo do %>
+	<title>Entre em contato e anuncie - <%= @nome_site %></title>
+	<meta name="description" content="">
+	<meta name="keywords" content="<%= @meta_keywords %>">
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="block-branco block-main">
+			<div class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense" %>
+			</div>
+
+			<p>
+				<h3 class="titulo-nao-destaque">Entre em contato e anuncie</h3>
+			</p>
+
+			<div class="detalhes">
+				<div class="img">
+					<span class="glyphicon <%= @icon %> p100"></span>
+				</div>
+				<div>
+					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+					cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+					proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</div>
+			</div>
+
+			<hr/>
+
+			<div>
+				<% if params[:notice] == 'contato-enviado' %>
+					<div class="alert alert-success alert-dismissable">
+					  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					  <strong>Seus dados foram enviados com sucesso!</strong>
+					</div>
+				<% else %>
+					<%= form_for @contato, :html => {role: :form} do |f| %>
+						<div class="form-group">
+							<label class="control-label">Nome</label>
+							<div class="">
+								<%= f.text_field :nome, :class => 'form-control', placeholder: 'Nome' %>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">E-mail</label>
+							<div class="">
+								<%= f.email_field :email, :class => 'form-control', placeholder: 'E-mail' %>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Assunto</label>
+							<div class="">
+								<%= f.text_field :assunto, :class => 'form-control', placeholder: 'Assunto' %>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="control-label">Mensagem</label>
+							<div class="">
+								<%= f.text_area :mensagem, :class => 'form-control', placeholder: 'Digite aqui sua mensagem', rows: 5%>
+							</div>
+						</div>
+						<%= f.hidden_field :situacao, value: 1 %>
+						<div class="row">
+							<div class="block-main">
+								<div class="col-md-2">
+									<%= f.submit 'Enviar', class: 'btn btn-danger btn-block' %>
+								</div>
+							</div>
+						</div>
+					<% end %><!-- end form  -->
+				<% end %><!-- end if  -->
+			</div>
+
+		</div>
+	</div>
+
+	<%= render partial: "principal/aside" %>
+</div>

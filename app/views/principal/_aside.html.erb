@@ -1,0 +1,148 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<div id="aside" class="col-md-4">
+	<div class="block-aside">
+
+		<div class="block-branco block-in-aside">
+			<h5 class="clear"><strong>Clique nos tópicos abaixo</strong></h5>
+			<div class="text-center topicos2">
+				<% @topicos.each do |t| %>
+					<a class="topicos" title="<%= t.nome %>" href="<%= root_url %>/tag/<%= t.url %>/" data-no-turbolink="true">
+						<span class="label label-danger t14"><%= t.nome %></span>
+					</a>
+				<% end %>
+			</div>
+			<div class="busca">
+				<%= form_for @busca do |f| %>
+					<div class="input-group">
+			      <%= f.text_field :termo, :class => "form-control", :placeholder => "Digite o que você procura" %>
+			      <span class="input-group-btn">
+			      	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search"></span></button>
+			      </span>
+			    </div>
+		    <% end %>
+			</div>
+		</div>
+		<br/>
+
+		<% @banners.each do |b| %>
+			<% if b.prioridade == 1 %>
+				<div id="publicidade1">
+					<a title="<%= b.titulo %>" href="<%= b.url_destino %>" target="<%= b.abrir_em %>" data-no-turbolink="true" <%= b.evento.blank? ? nil : b.evento.html_safe %>>
+						<img title="<%= b.title_img %>" alt="<%= b.alt_img %>" class="p100" src="<%= root_url %>/<%= image_path b.imagem %>">
+					</a>
+				</div>
+				<br/>
+			<% end %>
+		<% end %>
+
+		<% @banners.each do |b| %>
+			<% if b.prioridade == 2 %>
+				<div id="publicidade2">
+					<a title="<%= b.titulo %>" href="<%= b.url_destino %>" target="<%= b.abrir_em %>" data-no-turbolink="true" <%= b.evento.blank? ? nil : b.evento.html_safe %>>
+						<img title="<%= b.title_img %>" alt="<%= b.alt_img %>" class="p100" src="<%= root_url %>/<%= image_path b.imagem %>">
+					</a>
+				</div>
+				<br/>
+			<% end %>
+		<% end %>
+
+		<div class="block-branco fb-block-in-aside text-center">
+			<div class="fb-page" data-href="http://www.facebook.com/FacebookDevelopers" data-height="230" data-width="100%" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="false"></div>
+		</div>
+		<br/>
+
+		<% if is_mobile? %>
+			<div id="publicidadeGoogle" class="block-branco block-in-aside text-center">
+				<div class="anuncio-google">Anúncios</div>
+				<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+				<!-- SITE Mobile 300x250 -->
+				<ins class="adsbygoogle"
+				  style="display:inline-block;width:300px;height:250px"
+				  data-ad-client="ca-pub-2906237394805529"
+				  data-ad-slot="2929641291"></ins>
+				<script>
+				(adsbygoogle = window.adsbygoogle || []).push({});
+				</script>
+			</div>
+			<br/>
+		<% end %>
+
+		<% if params[:notice] == 'newsletter-cadastrada' %>
+			<div class="alert alert-success alert-dismissable">
+			  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			  <strong>Seus dados foram enviados com sucesso!</strong>
+			</div>
+		<% else %>
+			<div class="block-branco block-in-aside">
+				<h5 class="clear"><strong>Receba novidades e promoções</strong></h5>
+				<p>
+					Fique por dentro das novidades do site.
+				</p>
+				<%= form_for @newsletter do |n| %>
+					<div class="form-group">
+						<label>Nome</label>
+						<%= n.text_field :nome, :required => true, :class => 'form-control' %>
+					</div>
+					<div class="form-group">
+						<label>E-mail</label>
+						<%= n.email_field :email, :required => true, :class => 'form-control' %>
+					</div>
+					<%= n.hidden_field :situacao, :value => 1 %>
+					<%= n.submit 'Enviar', :class => 'btn btn-danger' %>
+				<% end %>
+			</div>
+			<br/>
+		<% end %>
+
+		<% @banners.each do |b| %>
+			<% if b.prioridade == 3 %>
+				<div id="publicidade3">
+					<a title="<%= b.titulo %>" href="<%= b.url_destino %>" target="<%= b.abrir_em %>" data-no-turbolink="true" <%= b.evento.blank? ? nil : b.evento.html_safe %>>
+						<img title="<%= b.title_img %>" alt="<%= b.alt_img %>" class="p100" src="<%= root_url %>/<%= image_path b.imagem %>">
+					</a>
+				</div>
+			<% end %>
+		<% end %>
+
+		<div id="voce-ja-viu" class="block-branco block-in-aside">
+			<h5 class="clear"><strong>Outros posts</strong></h5><hr/>
+			<ul class="list-unstyled">
+				<% @otherposts.each do |op| %>
+					<li>
+						<a itemprop="url" title="<%= op.title_link %>" href="<%= root_url %>/<%= op.categoria.url + '/' + op.url %>" data-no-turbolink="true">
+							<% if op.tipo_midia == 3 %>
+								<div class="row">
+									<div class="col-md-1"></div>
+									<div class="col-md-2 img-populares">
+										<figure class="caixa_corte">
+											<img itemprop="url" class="img-popular" title="<%= op.title_img %>" alt="<%= op.alt_img %>" src="<%= root_url %>/<%= image_path op.miniatura %>">
+										</figure>
+									</div>
+									<div class="col-md-9">
+										<div class="titulo-rodape">
+											<strong><%= op.titulo %></strong>
+										</div>
+									</div>
+								</div>
+								<br/>
+							<% end %>
+						</a>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+
+		<% @banners.each do |b| %>
+			<% if b.prioridade == 9 %>
+				<br/>
+				<div>
+					<a title="<%= b.titulo %>" href="<%= b.url_destino %>" target="<%= b.abrir_em %>" data-no-turbolink="true" <%= b.evento.blank? ? nil : b.evento.html_safe %>>
+						<img title="<%= b.title_img %>" alt="<%= b.alt_img %>" class="p100" src="<%= root_url %>/<%= image_path b.imagem %>">
+					</a>
+				</div>
+			<% end %>
+		<% end %>
+
+	</div>
+</div>

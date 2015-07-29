@@ -1,0 +1,24 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% browser = Browser.new(:ua => request.env["HTTP_USER_AGENT"], :accept_language => "en-us") %>
+<% unless browser.mobile? %>
+	<div class="row" style="margin-left: 0px;">
+		<div class="col-md-6">
+			<div class="anuncio-google">Anúncios</div>
+			<!-- Script do Adesens here -->
+		</div>
+
+		<div class="col-md-6">
+			<div class="anuncio-google">Anúncios</div>
+			<!-- Script do Adsense here -->
+		</div>
+	</div>
+<% else %>
+
+	<!-- 300x250 -->
+	<div>
+		<div class="anuncio-google">Anúncios</div>
+		<!-- Script do adesense here -->
+	</div>
+
+<% end %>

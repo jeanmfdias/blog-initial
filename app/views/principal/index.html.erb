@@ -1,0 +1,91 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% content_for :seo do %>
+	<title><%= @titulo_site %></title>
+	<meta name="description" content="<%= @descricao_site %>">
+	<meta name="keywords" content="<%= @meta_keywords %>">
+	<link rel="canonical" href="<%= root_url %>">
+<% end %>
+
+<div itemscope itemtype="http://schema.org/Blog" class="row">
+	<div class="col-md-8">
+		<div class="block-branco block-main">
+			<div id="adsense-top" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense" %>
+			</div>
+
+			<p>
+				<h3 itemprop="genre" class="titulo-nao-destaque">Últimas mensagens</h3>
+			</p>
+			<% @posts.each do |p| %>
+				<hr/>
+				<div>
+					<p>
+						<div class="data-publi">
+							<%= postdate p.created_at %>
+						</div>
+
+						<a itemprop="url" title="<%= p.title_link %>" href="<%= root_url %>/<%= p.categoria.url + '/' + p.url %>" data-no-turbolink="true">
+							
+							<div class="welcome-post">
+								<div class="imagem"> 
+									<div class="imagem_post">
+										<img itemprop="image" title="<%= p.title_img %>" alt="<%= p.alt_img %>" src="<%= root_url %>/<%= image_path p.midia %>" class="p100" />
+									</div>
+								</div>
+								<div class="textos">
+									<div class="titulo_post">
+										<h4 itemprop="name">
+											<%= p.titulo %>
+										</h4>
+									</div>
+									<div class="categoria_post"> 
+										<p itemprop="genre">
+											<strong><%= p.categoria.nome %></strong>
+										</p>
+									</div>
+								</div>
+							</div>
+
+						</a>
+					</p>
+
+					<div itemprop="text" id="conteudo-blog" class="text-justify">
+						<%= truncate_html p.conteudo, length: 350 %>
+					</div>
+
+					<div class="social row">
+						<div class="col-md-4 botoes-social">
+							<a itemprop="url" title="Continue lendo <%= p.title_link %>" href="<%= root_url %>/<%= p.categoria.url + '/' + p.url %>" data-no-turbolink="true">
+								<span class="bold">
+									Continue Lendo
+								</span>
+							</a>
+						</div>
+						<div class="col-md-8">
+							<!-- begin icones sociais -->
+							<div class="btn-social-fb-nm">
+								<div class="fb-like" data-href="<%= root_url %>/<%= p.categoria.url %>/<%= p.url %>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+							</div>
+							<div class="btn-social">
+								<a href="https://twitter.com/share" data-url="<%= root_url %><%= p.categoria.url %>/<%= p.url %>" class="twitter-share-button" data-text="<%= truncate_html strip_tags(p.conteudo), length: 50 %>" data-lang="pt" data-hashtags="blogInitial">Tweetar</a>
+							</div>
+							<div class="btn-social">
+								<div class="g-plusone" data-size="medium" href="<%= root_url %>/<%= p.categoria.url %>/<%= p.url %>"></div>
+							</div>
+							<!-- end icones sociais -->
+						</div>
+					</div>
+
+				</div>
+			<% end %>
+
+			<div id="adsense-bottom" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense_bottom" %>
+			</div>
+
+			<%= paginate @posts %>
+		</div>
+	</div>
+	<%= render partial: "principal/aside" %>
+</div>

@@ -1,0 +1,140 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% content_for :seo do %>
+	<meta property="og:image" content="<%= @url_base2 %><%= image_path @post.midia %>" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:url" content="<%= root_url %><%= @post.categoria.url.to_s + '/' + @post.url.to_s %>" />
+	<meta property="og:description" content="<%= @post.meta_descricao %>">
+	<meta property="og:title" content="<%= @post.meta_titulo.to_s %>" />
+	<meta property="og:type" content="blog" />
+	<title><%= @post.meta_titulo.to_s %></title>
+	<meta name="description" content="<%= @post.meta_descricao %>">
+	<meta name="keywords" content="<%= @post.meta_keywords %>">
+<% end %>
+
+<div class="row">
+	<div class="col-md-8">
+		<div class="block-branco block-main">
+			
+			<article>
+				<p itemscope itemtype="http://schema.org/Blog">
+					<!-- Data de publicação -->
+					<div class="data-publi">
+						<%= postdate @post.created_at %>
+					</div>
+					
+					<a itemprop="url" title="<%= @post.title_link %>" href="<%= root_url %>/<%= @post.categoria.url.to_s + '/' + @post.url.to_s %>" data-no-turbolink="true">
+						
+						<div class="welcome-post">
+							<div class="imagem"> 
+								<div class="imagem_post">
+									<img itemprop="image" title="<%= @post.title_img %>" alt="<%= @post.alt_img %>" src="<%= root_url %>/<%= image_path @post.midia %>" class="p100" />
+								</div>
+							</div>
+							<div class="textos">
+								<div class="categoria_post"> 
+									<h4>
+										<%= @post.categoria.nome %>
+									</h4>
+								</div>
+								<div class="titulo_post">
+									<h3>
+										<%= @post.titulo %>
+									</h3>
+								</div>
+							</div>
+						</div>
+
+					</a>
+				</p>
+
+				<div id="adsense-top" class="text-center">
+					<%= render partial: "principal/adsense" %>
+				</div>
+				
+				<% if !@post.video.blank? && @post.video_align == 1 %>
+					<div>
+						<iframe class="video" src="http://www.youtube.com/embed/<%= @post.video %>" frameborder="0" allowfullscreen></iframe>
+					</div>
+				<% end %>
+
+				<div id="conteudo-blog" class="text-justify">
+					<%= @post.conteudo.html_safe %>
+				</div>
+
+				<% if !@post.video.blank? && @post.video_align == -1 %>
+					<div>
+						<iframe class="video" src="http://www.youtube.com/embed/<%= @post.video %>" frameborder="0" allowfullscreen></iframe>
+					</div>
+				<% end %>
+
+				<% if @post.assinatura == 1 %>
+					<p>
+						<a class="assinatura" href="<%= root_url %>" title="Saiba mais sobre o <%= @autor %>" target="_blank" rel="author"><%= @autor %></a>
+					</p>
+				<% end %>
+
+			</article>
+
+			<div id="adsense-bottom" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense_bottom" %>
+			</div>
+
+			<div class="block-main">
+				<div itemscope itemtype="http://schema.org/Blog" class="row">
+					<div class="col-md-10">
+						<div id="social-post" class="text-right">
+							<!-- begin icones sociais -->
+							<div class="btn-social-fb">
+								<div class="fb-like" data-href="<%= root_url %>/<%= @post.categoria.url %>/<%= @post.url %>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+							</div>
+							<div class="btn-social">
+								<a href="https://twitter.com/share" data-url="<%= root_url %><%= @post.categoria.url %>/<%= @post.url %>" class="twitter-share-button" data-text="<%= truncate_html strip_tags(@post.conteudo), length: 50 %>" data-lang="pt" data-hashtags="blogInitial">Tweetar</a>
+							</div>
+							<div class="btn-social">
+								<div class="g-plusone" data-size="medium"></div>
+							</div>
+							<!-- end icones sociais -->
+						</div>
+					</div>
+					<div class="col-md-2">
+						<a title="Voltar para Home" class="btn btn-danger btn-block" data-no-turbolink="true" href="<%= root_url %>/<%= @post.categoria.url %>">Voltar</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<br/>
+
+		<div itemscope itemtype="http://schema.org/Blog" class="block-branco block-main">
+			<h3 class="clear">Relacionados</h3>
+			<div class="block-main">
+				<div class="row">
+					<% @recomendamos.each do |r| %>
+						<div class="col-md-4">
+							<a itemprop="url" title="<%= r.title_link %>" href="<%= root_url %>/<%= r.categoria.url + '/' + r.url %>" data-no-turbolink="true">
+								<% if r.tipo_midia == 3 %>
+									<figure class="corte_recomendados">
+										<img itemprop="image" title="<%= r.title_img %>" alt="<%= r.alt_img %>" src="<%= root_url %>/<%= image_path r.midia %>">
+									</figure>		
+									<div >
+										<h4 class="titulo_rec"><%= r.titulo %></h4>
+									</div>
+								<% end %>
+							</a>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+		<br/>
+
+		<div class="block-branco block-main">
+			<h3 class="clear">Comentários</h3>
+			<br/>
+			<div class="fb-comments" data-href="<%= root_url %>/<%= @post.categoria.url %>/<%= @post.url %>" data-numposts="5" data-colorscheme="light" data-width="740" data-mobile></div>
+		</div>
+	</div>
+
+	<%= render partial: "principal/aside" %>
+</div>

@@ -1,0 +1,18 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<div class="row">
+	<div class="col-md-12">
+		<div itemscope itemtype="http://schema.org/Blog">
+			<figure id="banner_site">
+				<a itemprop="url" title="<%= @autor %>" href="<%= @url_banner %>" data-no-turbolink="true" <%= is_mobile? ? nil : "target=_blank" %>>
+					<img itemprop="image" title="<%= @title_banner %>" alt="<%= @alt_banner %>" src="<%= root_url %>/<%= @banner_main %>" class="p100">
+				</a>
+			</figure>
+			<figure id="banner_mobile" class="text-center">
+				<a itemprop="url" title="<%= @autor %>" href="<%= @url_banner_mobile %>" data-no-turbolink="true">
+					<img itemprop="image" title="<%= @title_banner %>" alt="<%= @alt_banner %>" src="<%= root_url %>/<%= @banner_mobile %>" class="p100">
+				</a>
+			</figure>
+		</div>
+	</div>
+</div>

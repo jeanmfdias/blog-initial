@@ -1,0 +1,19 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% browser = Browser.new(:ua => request.env["HTTP_USER_AGENT"], :accept_language => "en-us") %>
+<% if !browser.mobile? %>
+	<!-- 728x90 -->	
+	<div>
+		<div class="anuncio-google align-adwords">Anúncios</div>
+		<!-- Sript do AdSense here -->
+	</div>
+
+<% else %>
+
+	<!-- 300x250 -->
+	<div>
+		<div class="anuncio-google">Anúncios</div>
+		<!-- Script do Adsense here -->
+	</div>
+
+<% end %>
