@@ -4,7 +4,7 @@ My first website project, created on Node.js. This is a blog.
 
 ## Modeling
 
-Users
+### Users
 - name
 - nickname
 - email
@@ -14,14 +14,14 @@ Users
 - created_at
 - updated_at
 
-Media
+### Media
 - name
 - file
 - status
 - created_at
 - updated_at
 
-Category
+### Category
 - name
 - description
 - logo_media_id
@@ -31,7 +31,7 @@ Category
 - created_at
 - updated_at
 
-Articles
+### Articles
 - title
 - content
 - feature_media_id
@@ -41,7 +41,7 @@ Articles
 - created_at
 - updated_at
 
-SEO
+### SEO
 - title
 - decription
 - obejct_id
@@ -49,8 +49,8 @@ SEO
 
 ## Next Ideas
 
-[ ] Feature to Comments
-[ ] Feature to Contacts
-[ ] Feature to Newsletter
-[ ] Feature to Adverts
-[ ] Feature to Manager Blog
+- [ ] Feature to Comments
+- [ ] Feature to Contacts
+- [ ] Feature to Newsletter
+- [ ] Feature to Adverts
+- [ ] Feature to Manager Blog
