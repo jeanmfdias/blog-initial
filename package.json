@@ -1,0 +1,32 @@
+{
+  "name": "blog-initial",
+  "version": "2.0.0",
+  "description": "Project of blog structure",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeanmfdias/blog-initial.git"
+  },
+  "keywords": [
+    "nodejs"
+  ],
+  "author": "Jean Dias",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeanmfdias/blog-initial/issues"
+  },
+  "homepage": "https://github.com/jeanmfdias/blog-initial#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.3",
+    "mongoose": "^5.3.1",
+    "nodemon": "^1.18.4"
+  },
+  "devDependencies": {
+    "eslint": "^5.6.1"
+  }
+}
