@@ -15,4 +15,4 @@ const Category = new mongoose.Schema({
   updated_at: { type: Date, default: Date.now }
 });
 
-module.exports = restful.model('Media', Media);
+module.exports = restful.model('Category', Category);
