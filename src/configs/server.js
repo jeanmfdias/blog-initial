@@ -1,14 +1,22 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 
-const Routes = require('./routes');
+const routes = require('./routes');
+const allowCors = require('./cors');
+const env =  require('../../env.json');
 
 const app = express();
-const port = 3000;
+const port = env.APP_PORT;
 
-app.use('/', Routes());
-app.use(express.static('./src/assets'));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(allowCors);
+app.use('/api/v1', routes());
 
-app.set('view engine', 'ejs');
-app.set('views', './src/views');
+app.listen(port, () => {
+  if (env.ENV == 'dev') {
+    console.log(`Running at port ${port}`);
+  }
+});
 
-module.exports = { app, port };
+module.exports = app;
