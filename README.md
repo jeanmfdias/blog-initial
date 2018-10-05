@@ -9,7 +9,7 @@ My first website project, created on Node.js. This is a blog.
 - nickname
 - email
 - password
-- profile_midia_id
+- profile_media_id
 - status
 - created_at
 - updated_at
