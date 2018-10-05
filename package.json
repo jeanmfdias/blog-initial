@@ -1,18 +1,19 @@
 {
   "name": "blog-initial",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Project of blog structure",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "test": "mocha tests/"
+    "test": "mocha tests/",
+    "production": "pm2 start index.js --name blog-initial-api"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jeanmfdias/blog-initial.git"
   },
   "keywords": [
-    "nodejs"
+    "nodejs", "express", "api", "blog"
   ],
   "author": "Jean Dias",
   "license": "MIT",
@@ -21,10 +22,12 @@
   },
   "homepage": "https://github.com/jeanmfdias/blog-initial#readme",
   "dependencies": {
-    "ejs": "^2.6.1",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongoose": "^5.3.1",
-    "nodemon": "^1.18.4"
+    "node-restful": "^0.2.6",
+    "nodemon": "^1.18.4",
+    "pm2": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^5.6.1",

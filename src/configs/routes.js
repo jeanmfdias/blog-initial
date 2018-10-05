@@ -1,10 +1,10 @@
 const express = require('express');
-const HomeController = require('../controllers/homeController');
+const MediaService = require('../services/mediaService');
 
 module.exports = () => {
   const Router = express.Router();
 
-  Router.get('/', (req, res) => HomeController.index(req, res));
+  MediaService.register(Router, '/media');
 
   return Router;
 }
