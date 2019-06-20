@@ -1,0 +1,90 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% content_for :seo do %>
+	<meta property="og:image" content="<%= @url_base2 %><%= image_path '' %>" />
+	<meta property="og:image:type" content="image/jpeg" />
+	<meta property="og:url" content="<%= root_url %>perguntas-biblicas/<%= @post.categoria.url %>/<%= @post.url %>" />
+	<meta property="og:description" content="<%= @post.meta_descricao %>">
+	<meta property="og:title" content="<%= @post.meta_titulo %>" />
+	<meta property="og:type" content="blog" />
+	<title><%= @post.meta_titulo %></title>
+	<meta name="description" content="<%= @post.meta_descricao %>">
+	<meta name="keywords" content="<%= @post.meta_keywords %>">
+<% end %>
+
+<div itemscope itemtype="http://schema.org/Blog" class="row">
+	<div class="col-md-8">
+		<div class="block-branco block-main">
+			<div id="adsense-top" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense" %>
+			</div>
+
+			<div class="row">
+				<div class="col-md-2"></div>
+				<div class="col-md-3"><div class="texto-busca-ask">Digite sua pergunta</div></div>
+				<div class="col-md-5">
+					<%= form_for @busca do |f| %>
+						<div class="input-group">
+				      <%= f.text_field :termo, :class => "form-control", :placeholder => "Digite o que você procura" %>
+				      <span class="input-group-btn">
+				      	<button type="submit" class="btn btn-default" ><span class="glyphicon glyphicon-search"></span></button>
+				      </span>
+				    </div>
+			    <% end %>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<br/>
+
+			<div class="social row">
+				<div class="col-md-12 botoes-social">
+					<h3 class="titulo-nao-destaque"><%= @categoria.nome %></h3>
+				</div>
+			</div>
+
+			<hr/>
+	
+			<article itemscope itemtype="http://schema.org/Question">
+				<div class="perguntasErespostas"> 
+					<h4 itemprop="name" class="vermelho">
+						<%= @post.titulo %>
+					</h4>
+				</div>
+				<div class="perguntasErespostas text-justify">
+					<h5 itemprop="suggestedAnswer">
+						<%= @post.conteudo.html_safe %>
+					</h5>
+				</div>
+			</article>
+			<hr class="clear"/>
+
+			<div id="adsense-bottom" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense_bottom" %>
+			</div>
+
+			<div class="block-main">
+				<div class="row">
+					<div class="col-md-9">
+						<!-- begin icones sociais -->
+						<div id="social-post" class="text-right">
+							<div class="btn-social-fb">
+								<div class="fb-like" data-href="<%= root_url %>/<%= @categoria.categoria.url %>/<%= @categoria.url %>/<%= @post.url %>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+							</div>
+							<div class="btn-social">
+								<a href="https://twitter.com/share" data-url="<%= root_url %><%= @categoria.categoria.url %>/<%= @categoria.url %>/<%= @post.url %>" class="twitter-share-button" data-text="<%= truncate_html strip_tags(@categoria.descricao), length: 50 %>" data-lang="pt" data-hashtags="blogInitial">Tweetar</a>
+							</div>
+							<div class="btn-social">
+								<div class="g-plusone" data-size="medium"></div>
+							</div>
+						</div>
+						<!-- end icones sociais -->
+					</div>
+					<div class="col-md-3">
+						<a itemprop="url" class="btn btn-danger btn-block" title="Voltar para <%= @perguntas %>" href="<%= root_url %>/<%= @perguntas %>/<%= @categoria.url %>" data-no-turbolink="true">Ver todas Perguntas</a>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<%= render partial: "principal/aside" %>
+</div>

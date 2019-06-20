@@ -1,0 +1,23 @@
+# Copyright (c) 2015 Jean Dias
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  titulo: MyString
+  conteudo: MyText
+  url: MyString
+  meta_descricao: MyString
+  meta_titulo: MyString
+  midia: MyString
+  categoria_id: 
+  situacao: 1
+
+two:
+  titulo: MyString
+  conteudo: MyText
+  url: MyString
+  meta_descricao: MyString
+  meta_titulo: MyString
+  midia: MyString
+  categoria_id: 
+  situacao: 1

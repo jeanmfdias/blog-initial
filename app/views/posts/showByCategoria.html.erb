@@ -1,0 +1,122 @@
+<!-- Copyright (c) 2015 Jean Dias -->
+
+<% @categoria.each do |c| %>
+	<% @categoria = c %>
+<%end %>
+
+<% content_for :seo do %>
+	<meta property="og:url" content="<%= root_url %><%= @categoria.url %>" />
+	<meta property="og:description" content="<%= @categoria.meta_descricao %>">
+	<meta property="og:title" content="<%= @categoria.meta_titulo %>" />
+	<meta property="og:type" content="blog" />
+	<% if params[:categoria] == 'esbocos-de-pregacoes' %>
+		<meta property="og:image" content="<%= @url_base2 %><%= image_path '' %>" />
+		<meta property="og:image:type" content="image/jpeg" />
+	<% elsif params[:categoria] == 'estudos-para-celulas' %>
+		<meta property="og:image" content="<%= @url_base2 %><%= image_path '' %>" />
+		<meta property="og:image:type" content="image/jpeg" />
+	<% end %>
+	<title><%= @categoria.meta_titulo %></title>
+	<meta name="description" content="<%= @categoria.meta_descricao %>">
+	<meta name="keywords" content="<%= @categoria.meta_keywords %>">
+<% end %>
+
+<div itemscope itemtype="http://schema.org/Blog" class="row">
+	<div class="col-md-8">
+		<div class="block-branco block-main">
+			<div id="adsense-top" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense" %>
+			</div>
+			
+			<p>
+				<h3 itemprop="name" class="titulo-nao-destaque"><%= @categoria.nome %></h3>
+			</p>
+
+			<div class="detalhes">
+				<div class="img">
+					<span class="glyphicon <%= @icon %> p100"></span>
+				</div>
+				<div>
+					<%= @categoria.descricao.html_safe %>
+				</div>
+			</div>
+			
+			<% @posts.each do |p| %>
+				<hr/>
+				<section>
+					<p>
+						<div class="data-publi">
+							<%= postdate p.created_at %>
+						</div>
+						
+						<a itemprop="url" title="<%= p.title_link %>" href="<%= root_url %>/<%= p.categoria.url + '/' + p.url %>" data-no-turbolink="true">
+							
+							<div class="welcome-post">
+								<div class="imagem"> 
+									<div class="imagem_post">
+										<img itemprop="image" title="<%= p.title_img %>" alt="<%= p.alt_img %>" src="<%= root_url %>/<%= image_path p.midia %>" class="p100" />
+									</div>
+								</div>
+								<div class="textos">
+									<div class="categoria_post"> 
+										<p itemprop="genre">
+											<strong><%= p.categoria.nome %></strong>
+										</p>
+									</div>
+									<div class="titulo_post">
+										<h4 itemprop="name">
+											<%= p.titulo %>
+										</h4>
+									</div>
+								</div>
+							</div>
+
+						</a>
+					</p>
+
+					<div itemprop="text" id="conteudo-blog" class="text-justify">
+						<%= truncate_html p.conteudo, length: 350 %>
+					</div>
+
+					<div class="social row">
+						<div class="col-md-4 botoes-social">
+							<a itemprop="url" title="Continue lendo <%= p.title_link %>" href="/<%= p.categoria.url + '/' + p.url %>" data-no-turbolink="true">
+								<span class="bold">
+									Continue Lendo
+								</span>
+							</a>
+						</div>
+						<div class="col-md-8">
+							<!-- begin icones sociais -->
+							<div class="btn-social-fb-nm">
+								<div class="fb-like" data-href="<%= root_url %>/<%= p.categoria.url %>/<%= p.url %>" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+							</div>
+							<div class="btn-social">
+								<a href="https://twitter.com/share" data-url="<%= root_url %><%= p.categoria.url %>/<%= p.url %>" class="twitter-share-button" data-text="<%= truncate_html strip_tags(p.conteudo), length: 50 %>" data-lang="pt" data-hashtags="blogInitial">Tweetar</a>
+							</div>
+							<div class="btn-social">
+								<div class="g-plusone" data-size="medium"></div>
+							</div>
+							<!-- end icones sociais -->
+						</div>
+					</div>
+
+				</section>
+			<% end %>
+
+			<div id="adsense-bottom" class="text-center espaco-adsense">
+				<%= render partial: "principal/adsense_bottom" %>
+			</div>
+			
+			<div class="block-main">
+				<div class="row">
+					<div class="col-md-10"><%= paginate @posts %></div>
+					<div class="col-md-2">
+						<%= link_to 'Voltar', {action: "index", controller: "principal"}, :class => "btn btn-danger btn-block", :title => "Voltar para Home", "data-no-turbolink" => true %>
+					</div>
+				</div>
+			</div>
+		</div>	
+	</div>
+	<%= render partial: "principal/aside" %>
+</div>
