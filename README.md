@@ -1,5 +1,5 @@
 # blog-initial
-Meu Primeiro projeto em RoR para blogs
+Meu Primeiro projeto em Ruby On Rails para blogs
 
 The MIT License (MIT)
 
